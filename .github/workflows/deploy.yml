@@ -18,7 +18,7 @@ jobs:
 
     steps:
       - name: Checkout repository
-        uses: actions/checkout@v4
+        uses: actions/checkout@v5
 
       - name: Setup R
         uses: r-lib/actions/setup-r@v2
@@ -92,7 +92,7 @@ jobs:
           RSCONNECT_USERNAME: ${{ vars.RSCONNECT_USERNAME }}
 
       - name: Remove account credentials
-        if: always()
+        if: always() && vars.RSCONNECT_USERNAME != ''
         run: |
           Rscript -e '
           rsconnect::removeAccount(
